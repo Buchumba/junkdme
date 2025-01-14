@@ -1,0 +1,272 @@
+<Ui xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.blizzard.com/wow/ui/">	
+	<Script file="junkdme.lua"/>
+	<Frame name="JunkDme" inherits="BackdropTemplate" hidden="true" parent="UIParent" toplevel="true" movable="true" frameStrata="MEDIUM" enableMouse="true">
+		<Font name="jdmeFont" font="font/MORPHEUS.TTF">
+			<FontHeight  val="12"/>      			
+		</Font>
+		<Size x="250" y="200" />		
+		<Anchors>
+			<Anchor x="2" y="-11" point="CENTER" />
+		</Anchors>
+		<KeyValues>
+			<KeyValue key="backdropInfo" value="BACKDROP_DIALOG_32_32" keyType="string" type="global" />
+		</KeyValues>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border">
+			<BackgroundInsets left="11" right="12" top="12" bottom="11" />
+		</Backdrop>
+		<Layers>
+			<Layer level="OVERLAY">
+				<Texture file="Interface\DialogFrame\UI-DialogBox-Header">
+		          <Size>
+		            <AbsDimension x="180" y="45" />
+				  </Size>
+		          <Anchors>
+				    <Anchor point="TOP">
+		              <Offset>
+				        <AbsDimension x="0" y="18" />
+		              </Offset>
+				    </Anchor>
+		          </Anchors>
+				  <TexCoords left="0.2" right="0.8" top="0" bottom="0.6" />
+		        </Texture>
+				<FontString inherits="GameFontHighlight" font="font/MORPHEUS.TTF" text="J|cff54ff00u|r|cff52d014nk|r |cffc4ff53D|r|cffffec95m|re|r: настройки">
+					<Size>
+				        <AbsDimension x="0" y="0" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset x="0" y="0" />
+						</Anchor>						
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="OVERLAY">
+				<FontString inherits="GameFontNormal" font="font/MORPHEUS.TTF" text="Автопродажа серого хлама:">
+					<Size x="160" y="29" />
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset x="-12" y="40" />
+						</Anchor>
+					</Anchors>
+				</FontString>					
+			</Layer>			
+			<Layer level="OVERLAY">
+				<FontString inherits="GameFontNormal" font="font/MORPHEUS.TTF" text="Автопродажа |cff00FF00зеленых|r `Recipe`, `Pattern`, `Plan`, `Formula`:">
+					<Size x="150" y="40" />
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset x="-13" y="0" />
+						</Anchor>
+					</Anchors>
+				</FontString>					
+			</Layer>			
+		</Layers>	
+		<Frames>			
+			<Button name="$parent_CloseButton" inherits="UIPanelCloseButton">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="JunkDme" relativePoint="TOPRIGHT">
+						<Offset x="-25" y="-9"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						JunkDme:Hide()
+						SaleListXml:Hide()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="JDME_HelpButton" inherits="UIPanelButtonTemplate" text="?">
+				<Size x="20" y="20" />
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+						<Offset x="18" y="-15" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						            JDME_HelpButton_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+						
+			<Button name="GreySellXml" inherits="UIPanelButtonTemplate" text="">
+				<Size x="20" y="20" />
+				<Anchors>
+					<Anchor point="CENTER">
+						<Offset x="73" y="40" />
+					</Anchor>
+				</Anchors>
+				<Scripts>					
+					<OnClick>
+						JDME_SetGreySell()
+					</OnClick>					
+				</Scripts>
+			</Button>
+			<Button name="RecipeSellXml" inherits="UIPanelButtonTemplate" text="">
+				<Size x="20" y="20" />
+				<Anchors>
+					<Anchor point="CENTER">
+						<Offset x="73" y="0" />
+					</Anchor>
+				</Anchors>
+				<Scripts>					
+					<OnClick>
+						JDME_RecipesAutoSell()
+					</OnClick>					
+				</Scripts>
+			</Button>
+			<Button name="GreySellXml" inherits="UIPanelButtonTemplate" text="Список вещей на автопродажу  >>">
+				<NormalFont style="GameFontNormal" font="font/MORPHEUS.TTF"/>
+				<Size x="200" y="28" />
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset x="0" y="15" />
+					</Anchor>
+				</Anchors>
+				<Scripts>					
+					<OnClick>
+						if not SaleListXml:IsShown() then
+							SaleListXml:Show()
+							this:SetText("Список вещей на автопродажу [...]")
+							if JDME_SALE_LIST then
+								JDME_SaleListBuild(ScrollChildFrame)
+							else
+								JDME_AnounceEmptyList()
+							end
+						else
+							SaleListXml:Hide()							
+							this:SetText("Список вещей на автопродажу  >>")
+						end						
+					</OnClick>					
+				</Scripts>
+			</Button>								
+		</Frames>
+		<Scripts>
+			<OnLoad inherit="prepend">				
+				JunkDme_OnLoad();				
+				this:RegisterForDrag("LeftButton");
+				this:SetMovable(1);							
+			</OnLoad>
+			<OnDragStart>
+				this:StartMoving();
+				this.isMoving = true;
+			</OnDragStart>
+			<OnDragStop>
+				this:StopMovingOrSizing();
+				this.isMoving = false;
+			</OnDragStop>	
+			<OnEnter>
+				--JDME_Hundler()
+				--ADDITEMTOLISTFUNCTION()
+			</OnEnter>		
+		</Scripts>
+	</Frame>
+	-------------------------------------------------------------
+	-------------------2th FRAME: SALE LIST----------------------
+	-------------------------------------------------------------
+	<Frame name="SaleListXml" hidden="true" parent="UIParent" movable="true" frameStrata="HIGH" enableMouse="true" enableKeyboard="true">
+		<Size>
+			<AbsDimension x="250" y="300" />
+		</Size>		
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeTo="JunkDme" relativePoint="TOPRIGHT">
+				<Offset>
+				    <AbsDimension x="0" y="0" />
+		        </Offset>
+			</Anchor>
+		</Anchors>
+		<KeyValues>
+			<KeyValue key="backdropInfo" value="BACKDROP_DIALOG_32_32" keyType="string" type="global" />
+		</KeyValues>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border">
+			<BackgroundInsets left="11" right="12" top="12" bottom="11" />
+		</Backdrop>
+		<Layers>
+			<!--HEADER-->
+			<Layer level="OVERLAY">
+				<Texture file="Interface\DialogFrame\UI-DialogBox-Header">
+		          <Size>
+		            <AbsDimension x="210" y="45" />
+				  </Size>
+		          <Anchors>
+				    <Anchor point="TOP">
+		              <Offset>
+				        <AbsDimension x="0" y="18" />
+		              </Offset>
+				    </Anchor>
+		          </Anchors>
+				  <TexCoords left="0.2" right="0.8" top="0" bottom="0.6" />
+		        </Texture>
+				<FontString inherits="GameFontHighlight" font="font/MORPHEUS.TTF" text="J|cff54ff00u|r|cff52d014nk|r |cffc4ff53D|r|cffffec95m|re|r: список автопродажи">
+					<Size>
+				        <AbsDimension x="0" y="0" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset x="0" y="0" />
+						</Anchor>						
+					</Anchors>
+				</FontString>
+			</Layer>
+			<!--//HEADER-->					
+		</Layers>	
+		<Frames>			
+			<Button name="$parent_CloseButton" inherits="UIPanelCloseButton">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="SaleListXml" relativePoint="TOPRIGHT">
+						<Offset x="-25" y="-9"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						SaleListXml:Hide();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<ScrollFrame name="$parentScrollFrame" inherits="UIPanelScrollFrameTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-29" y="-40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="240" y="245"/>
+				</Size>				
+				<ScrollChild>
+					<Frame name="ScrollChildFrame">						
+						<Size><AbsDimension x="350" y="200" /></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="35" y="10" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>	
+				</ScrollChild>
+			</ScrollFrame>
+		</Frames>
+
+		<Scripts>
+			<OnLoad inherit="prepend">				
+				--JunkDme_OnLoad();
+				this:RegisterForDrag("LeftButton");
+				this:SetMovable(1);							
+			</OnLoad>
+			<OnDragStart>
+				this:StartMoving();
+				this.isMoving = true;
+			</OnDragStart>
+			<OnDragStop>
+				this:StopMovingOrSizing();
+				this.isMoving = false;
+			</OnDragStop>	
+			<OnEnter>
+				--JDME_Hundler()
+				--ADDITEMTOLISTFUNCTION()
+			</OnEnter>		
+		</Scripts>
+	</Frame>
+</Ui>

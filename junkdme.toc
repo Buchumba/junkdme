@@ -1,0 +1,8 @@
+## Title: J|cff54ff00u|r|cff52d014nk|r |cffc4ff53D|r|cffffec95m|re|r
+## Notes: Prodazha vsyakogo hlama v DME pri farme herbs. Cherez pochtu ili rembota. 
+## Version: 1.0
+## Author: Casta (guild "Going to death"), project: Turtle-wow, email: baners@mail.ru
+## SavedVariablesPerCharacter: JDME_GREY_AUTOSELL, JDME_SALE_LIST, JDME_RECIPES_AUTOSELL
+## Interface: 11200
+
+junkdme.xml
