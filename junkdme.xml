@@ -1,5 +1,4 @@
-<Ui xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.blizzard.com/wow/ui/">	
-	<Script file="junkdme.lua"/>
+<Ui xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.blizzard.com/wow/ui/">
 	<Frame name="JunkDme" inherits="BackdropTemplate" hidden="true" parent="UIParent" toplevel="true" movable="true" frameStrata="MEDIUM" enableMouse="true">
 		<Font name="jdmeFont" font="font/MORPHEUS.TTF">
 			<FontHeight  val="12"/>      			
@@ -18,7 +17,7 @@
 			<Layer level="OVERLAY">
 				<Texture file="Interface\DialogFrame\UI-DialogBox-Header">
 		          <Size>
-		            <AbsDimension x="180" y="45" />
+		            <AbsDimension x="116" y="45" />
 				  </Size>
 		          <Anchors>
 				    <Anchor point="TOP">
@@ -29,7 +28,7 @@
 		          </Anchors>
 				  <TexCoords left="0.2" right="0.8" top="0" bottom="0.6" />
 		        </Texture>
-				<FontString inherits="GameFontHighlight" font="font/MORPHEUS.TTF" text="J|cff54ff00u|r|cff52d014nk|r |cffc4ff53D|r|cffffec95m|re|r: настройки">
+				<FontString name="JDME_GeneralTitle" inherits="GameFontHighlight" font="font/MORPHEUS.TTF" text="">
 					<Size>
 				        <AbsDimension x="0" y="0" />
 					</Size>

@@ -7,6 +7,21 @@ local color_after_prefix = "e1e68a"
 local text_help_command = "/jdme [ссылка на предмет]"
 local WAIT_ITERATIONS = 700000 --(кол-во итераций) замедление перед каждой продажи итема
 local MAIL_IS_OPENER = nil
+local JDME_VERSION = "1.0.1"
+
+JDME_GLOBALS = CreateFrame("Frame")
+JDME_GLOBALS:RegisterEvent("ADDON_LOADED")
+JDME_GLOBALS:SetScript("OnEvent", function()
+    if event then        
+        if event == 'ADDON_LOADED' and arg1 == 'junkdme' then            
+            return JDME_GLOBALS.init()
+        end
+    end    
+end)
+
+function JDME_GLOBALS.init()
+  JDME_GeneralTitle:SetText("J|cff54ff00u|r|cff52d014nk|r |cffc4ff53D|r|cffffec95m|re|r v"..JDME_VERSION);  
+end
 
 SLASH_JDME1 = "/jdme"
 function SlashCmdList.JDME(msg, editbox)
@@ -27,6 +42,14 @@ function SlashCmdList.JDME(msg, editbox)
   end  
 end
 
+SLASH_JUNKDME1 = "/junkdme"
+function SlashCmdList.JUNKDME(msg, editbox)
+  if msg == "" then
+    JunkDme:Show()
+    JDME_ShowAllSaveValues()    
+  end
+end
+
 function JDME_AnounceEmptyList()
   DEFAULT_CHAT_FRAME:AddMessage(prefix.." |cff" .. color_after_prefix .. "Ваш список пуст но вы можете в него добавить первую вещь. Пример: '"..text_help_command.."'|r")
 end
@@ -45,7 +68,7 @@ end
 function JDME_Help()
   DEFAULT_CHAT_FRAME:AddMessage("Аддон `Junk DME` предназначен для автопродажи разных вещей внесенных в 5личный список.",1,1,0);
   DEFAULT_CHAT_FRAME:AddMessage("Список команд:",0,1,0);
-  DEFAULT_CHAT_FRAME:AddMessage("/jdme - открытие окна аддона.",1,1,1);
+  DEFAULT_CHAT_FRAME:AddMessage("/jdme, /junkdme - открытие окна аддона.",1,1,1);
   DEFAULT_CHAT_FRAME:AddMessage("/jdme help - вызов справки.",1,1,1);
   DEFAULT_CHAT_FRAME:AddMessage(text_help_command .. " - внесение предмета в личный список вашего персонажа для автопродажи.",1,1,1);
   DEFAULT_CHAT_FRAME:AddMessage("Об ошибка этого аддона, пожалуйста, сообщите Casta (Going to Death. Turtle-WOW).",1,1,0);
