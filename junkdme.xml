@@ -1,11 +1,11 @@
 <Ui xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.blizzard.com/wow/ui/">
-	<Frame name="JunkDme" inherits="BackdropTemplate" hidden="true" parent="UIParent" toplevel="true" movable="true" frameStrata="MEDIUM" enableMouse="true">
-		<Font name="jdmeFont" font="font/MORPHEUS.TTF">
-			<FontHeight  val="12"/>      			
-		</Font>
+	<Font name="jdmeFont" font="Fonts\ARIALN.TTF" inherits="GameFontNormal">
+		<FontHeight  val="12" />      			
+	</Font>
+	<Frame name="JunkDme" enableKeyboard="true" hidden="true" parent="UIParent" toplevel="true" movable="true" frameStrata="MEDIUM" enableMouse="true">
 		<Size x="250" y="200" />		
 		<Anchors>
-			<Anchor x="2" y="-11" point="CENTER" />
+			<Anchor point="CENTER" />
 		</Anchors>
 		<KeyValues>
 			<KeyValue key="backdropInfo" value="BACKDROP_DIALOG_32_32" keyType="string" type="global" />
@@ -17,7 +17,7 @@
 			<Layer level="OVERLAY">
 				<Texture file="Interface\DialogFrame\UI-DialogBox-Header">
 		          <Size>
-		            <AbsDimension x="116" y="45" />
+		            <AbsDimension x="130" y="45" />
 				  </Size>
 		          <Anchors>
 				    <Anchor point="TOP">
@@ -28,7 +28,7 @@
 		          </Anchors>
 				  <TexCoords left="0.2" right="0.8" top="0" bottom="0.6" />
 		        </Texture>
-				<FontString name="JDME_GeneralTitle" inherits="GameFontHighlight" font="font/MORPHEUS.TTF" text="">
+				<FontString name="JDME_GeneralTitle" inherits="jdmeFont" text="">
 					<Size>
 				        <AbsDimension x="0" y="0" />
 					</Size>
@@ -40,8 +40,8 @@
 				</FontString>
 			</Layer>
 			<Layer level="OVERLAY">
-				<FontString inherits="GameFontNormal" font="font/MORPHEUS.TTF" text="Автопродажа серого хлама:">
-					<Size x="160" y="29" />
+				<FontString inherits="jdmeFont"  text="Автопродажа серого хлама:">
+					<Size x="160" y="29" />					
 					<Anchors>
 						<Anchor point="CENTER">
 							<Offset x="-12" y="40" />
@@ -50,7 +50,7 @@
 				</FontString>					
 			</Layer>			
 			<Layer level="OVERLAY">
-				<FontString inherits="GameFontNormal" font="font/MORPHEUS.TTF" text="Автопродажа |cff00FF00зеленых|r `Recipe`, `Pattern`, `Plan`, `Formula`:">
+				<FontString inherits="jdmeFont" text="Автопродажа |cff00FF00зеленых|r `Recipe`, `Pattern`, `Plan`, `Formula`:">
 					<Size x="150" y="40" />
 					<Anchors>
 						<Anchor point="CENTER">
@@ -75,6 +75,11 @@
 				</Scripts>
 			</Button>
 			<Button name="JDME_HelpButton" inherits="UIPanelButtonTemplate" text="?">
+				<ButtonText font="Fonts\ARIALN.TTF">
+					<FontHeight>
+						<AbsValue val="11" />
+					</FontHeight>
+				</ButtonText>
 				<Size x="20" y="20" />
 				<Anchors>
 					<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
@@ -89,6 +94,11 @@
 			</Button>
 						
 			<Button name="GreySellXml" inherits="UIPanelButtonTemplate" text="">
+				<ButtonText font="Fonts\ARIALN.TTF">
+					<FontHeight>
+						<AbsValue val="11" />
+					</FontHeight>
+				</ButtonText>
 				<Size x="20" y="20" />
 				<Anchors>
 					<Anchor point="CENTER">
@@ -102,6 +112,11 @@
 				</Scripts>
 			</Button>
 			<Button name="RecipeSellXml" inherits="UIPanelButtonTemplate" text="">
+				<ButtonText font="Fonts\ARIALN.TTF">
+					<FontHeight>
+						<AbsValue val="11" />
+					</FontHeight>
+				</ButtonText>
 				<Size x="20" y="20" />
 				<Anchors>
 					<Anchor point="CENTER">
@@ -114,12 +129,16 @@
 					</OnClick>					
 				</Scripts>
 			</Button>
-			<Button name="GreySellXml" inherits="UIPanelButtonTemplate" text="Список вещей на автопродажу  >>">
-				<NormalFont style="GameFontNormal" font="font/MORPHEUS.TTF"/>
+			<Button name="GreySellXml" text="Список вещей на автопродажу >>" inherits="UIPanelButtonTemplate" virtual="true">
+				<ButtonText font="Fonts\ARIALN.TTF">
+					<FontHeight>
+						<AbsValue val="11" />
+					</FontHeight>
+				</ButtonText>				
 				<Size x="200" y="28" />
 				<Anchors>
 					<Anchor point="BOTTOM">
-						<Offset x="0" y="15" />
+						<Offset x="0" y="25" />
 					</Anchor>
 				</Anchors>
 				<Scripts>					
@@ -136,9 +155,9 @@
 							SaleListXml:Hide()							
 							this:SetText("Список вещей на автопродажу  >>")
 						end						
-					</OnClick>					
+					</OnClick>									
 				</Scripts>
-			</Button>								
+			</Button>				
 		</Frames>
 		<Scripts>
 			<OnLoad inherit="prepend">				
@@ -185,7 +204,7 @@
 			<Layer level="OVERLAY">
 				<Texture file="Interface\DialogFrame\UI-DialogBox-Header">
 		          <Size>
-		            <AbsDimension x="210" y="45" />
+		            <AbsDimension x="230" y="45" />
 				  </Size>
 		          <Anchors>
 				    <Anchor point="TOP">
@@ -196,7 +215,7 @@
 		          </Anchors>
 				  <TexCoords left="0.2" right="0.8" top="0" bottom="0.6" />
 		        </Texture>
-				<FontString inherits="GameFontHighlight" font="font/MORPHEUS.TTF" text="J|cff54ff00u|r|cff52d014nk|r |cffc4ff53D|r|cffffec95m|re|r: список автопродажи">
+				<FontString inherits="jdmeFont" text="J|cff54ff00u|r|cff52d014nk|r |cffc4ff53D|r|cffffec95m|re|r: список автопродажи">
 					<Size>
 				        <AbsDimension x="0" y="0" />
 					</Size>
@@ -234,7 +253,7 @@
 					<AbsDimension x="240" y="245"/>
 				</Size>				
 				<ScrollChild>
-					<Frame name="ScrollChildFrame">						
+					<Frame name="ScrollChildFrame">											
 						<Size><AbsDimension x="350" y="200" /></Size>
 						<Anchors>
 							<Anchor point="TOPLEFT">

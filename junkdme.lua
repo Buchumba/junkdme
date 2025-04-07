@@ -20,7 +20,7 @@ JDME_GLOBALS:SetScript("OnEvent", function()
 end)
 
 function JDME_GLOBALS.init()
-  JDME_GeneralTitle:SetText("J|cff54ff00u|r|cff52d014nk|r |cffc4ff53D|r|cffffec95m|re|r v"..JDME_VERSION);  
+  JDME_GeneralTitle:SetText("J|cff54ff00u|r|cff52d014nk|r |cffc4ff53D|r|cffffec95m|re|r v"..JDME_VERSION);
 end
 
 SLASH_JDME1 = "/jdme"
@@ -33,7 +33,7 @@ function SlashCmdList.JDME(msg, editbox)
   else 
     local _, _, item_name = strfind(msg, "|h(.+)|h")
     if item_name then      
-      JDME_AddListItem(msg) 
+      JDME_AddListItem(msg)       
       SaleListXml:Show()
       JDME_SaleListBuild(ScrollChildFrame)
     else       
