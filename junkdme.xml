@@ -163,7 +163,11 @@
 			<OnLoad inherit="prepend">				
 				JunkDme_OnLoad();				
 				this:RegisterForDrag("LeftButton");
-				this:SetMovable(1);							
+				this:SetMovable(1);	
+				--закрытие по ESC
+				tinsert(UISpecialFrames, this:GetName());
+				tinsert(UISpecialFrames, "SaleListXml");				
+				--						
 			</OnLoad>
 			<OnDragStart>
 				this:StartMoving();

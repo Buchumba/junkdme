@@ -7,7 +7,7 @@ local color_after_prefix = "e1e68a"
 local text_help_command = "/jdme [ссылка на предмет]"
 local WAIT_ITERATIONS = 700000 --(кол-во итераций) замедление перед каждой продажи итема
 local MAIL_IS_OPENER = nil
-local JDME_VERSION = "1.0.1"
+local JDME_VERSION = "1.0.2"
 
 JDME_GLOBALS = CreateFrame("Frame")
 JDME_GLOBALS:RegisterEvent("ADDON_LOADED")
